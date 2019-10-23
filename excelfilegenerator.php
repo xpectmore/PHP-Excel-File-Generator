@@ -48,4 +48,79 @@ while($row = mysqli_fetch_row($result)){
   print(trim($data));
   echo "\n";
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function xlsheader($file){
+	header("Content-Type: application/xls");
+	header("Content-Disposition: attachment; filename=".$file);
+	header("Pragma: no-cache");
+	header("Expires: 0");
+}
+
+function br(){
+	echo "\n";
+}
+
+function xlsrow(){
+	$row='';
+	$na = func_num_args();
+	for ($i=0;$i<$na;$i++){
+		$var=func_get_arg($i);
+		if($var != ""){
+			  $row .= "$var"."\t";
+		}else{
+			  $row .= ""."\t";
+		}
+	}
+	$row = str_replace("\t"."$", "", $row);
+	$row = preg_replace("/\r\n|\n\r|\n|\r/", " ", $row);
+	$row .= "\t";
+	print(trim($row));
+	echo "\n";
+}
+
+
+
+
+xlsheader('justademo.xls');
+
+xlsrow('Just','another','test');
+xlsrow('Thanks','For ','the' ,'ideea');
+
+br();
+xlsrow('Just','continue','to','work','on');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
